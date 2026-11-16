@@ -6,6 +6,7 @@ Built for the **#BuildHybridAI 2026** hackathon. Licensed under [Apache 2.0](./L
 
 | | |
 |---|---|
+| **Live demo** | https://clockdocs.web.app |
 | **Stack** | React 19 · Vite · Tailwind CSS 4 · Firebase JS SDK (`firebase/ai`, App Check, Auth, Firestore, Remote Config) |
 | **Hybrid modes used** | `PREFER_ON_DEVICE`, `ONLY_ON_DEVICE`, `ONLY_IN_CLOUD` |
 | **Zero secrets in the repo** | All config comes from `import.meta.env.VITE_*`; `.env` is git-ignored |
@@ -158,6 +159,8 @@ flowchart LR
 4. **Firestore**: *Build → Firestore Database* → create a database (production mode; the rules in this repo are deployed below).
 5. **Remote Config** (optional): add parameters `max_local_char_limit` (Number), `enable_cloud_deep_audit` (Boolean), `cloud_model` (String), then **Publish**.
 6. **App Check**: *Build → App Check → Apps* → register the web app. Firebase AI Logic requires App Check enforcement.
+
+> Repo helpers: `remoteconfig.template.json` holds the three Remote Config parameters and `firebase.json` enables Anonymous auth (`auth.providers.anonymous`), so `firebase deploy --only auth,remoteconfig,firestore:rules,hosting` reproduces this setup. Firebase AI Logic is turned on with the Gemini Developer API in the console (or the `ailogic` CLI commands behind `FIREBASE_CLI_EXPERIMENTS=ailogic`).
 
 ### 5.2 Configure the app
 

@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "max_local_char_limit": {
+      "defaultValue": { "value": "6000" },
+      "valueType": "NUMBER",
+      "description": "Max sanitized characters that Auto Hybrid Route will try to answer on-device before routing to the cloud."
+    },
+    "enable_cloud_deep_audit": {
+      "defaultValue": { "value": "true" },
+      "valueType": "BOOLEAN",
+      "description": "Kill-switch for every action that sends sanitized text to the cloud."
+    },
+    "cloud_model": {
+      "defaultValue": { "value": "gemini-3.5-flash-lite" },
+      "valueType": "STRING",
+      "description": "Cloud model used by Firebase AI Logic hybrid inference."
+    }
+  }
+}
