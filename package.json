@@ -1,0 +1,28 @@
+{
+  "name": "cloakdocs",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Privacy-first hybrid AI document workspace built on Firebase AI Logic hybrid inference (Gemini Nano on-device + Gemini in the cloud).",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy --only hosting,firestore:rules"
+  },
+  "dependencies": {
+    "firebase": "^13.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^6.3.0",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8"
+  }
+}

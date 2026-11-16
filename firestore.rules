@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// CloakDocs stores ONLY sanitized telemetry per anonymous user:
+// latency, execution target, scores and entity COUNTS. Raw document text and
+// the token->value map never leave the browser, and these rules reject any
+// unexpected field so that stays true even if client code regresses.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{uid}/audits/{auditId} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+             'kind', 'action', 'target', 'mode', 'engine', 'latencyMs', 'charCount',
+             'entityCounts', 'entityTotal', 'riskScore', 'complianceScore',
+             'docType', 'topRisks', 'summary', 'online', 'createdAt'
+           ])
+        && request.resource.data.kind is string
+        && request.resource.data.target in ['on_device', 'cloud', 'fallback']
+        && request.resource.data.latencyMs is number
+        && request.resource.data.latencyMs >= 0
+        && request.resource.data.charCount is number
+        && request.resource.data.charCount <= 500000
+        && (!('summary' in request.resource.data)
+            || (request.resource.data.summary is string && request.resource.data.summary.size() <= 600))
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "CloakDocs — Privacy-First Hybrid AI",
+  "short_name": "CloakDocs",
+  "version": "1.0.0",
+  "description": "Redact PII on-device with Gemini Nano, then send only sanitized text to Gemini in the cloud via Firebase AI Logic.",
+  "action": {
+    "default_title": "Open CloakDocs"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["sidePanel"]
+}
